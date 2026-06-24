@@ -1,0 +1,142 @@
+
+[build-system]
+requires = ["setuptools>=64", "setuptools_scm>=8", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "idaes_mvo"
+description = "idaes Multi-variant Optimization Framework"
+readme = { file = "README.md", content-type = "text/markdown" }
+requires-python = ">=3.13"
+license = { file = "BSD" }
+maintainers= [{ name = "Carl Laird", email = "claird@andrew.cmu.edu"}]
+classifiers = [
+  "Intended Audience :: End Users/Desktop",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: BSD License",
+  "Natural Language :: English",
+  "Operating System :: MacOS",
+  "Operating System :: Microsoft :: Windows",
+  "Operating System :: Unix",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Scientific/Engineering :: Machine Learning",
+  "Topic :: Scientific/Engineering :: Mathematics",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+keywords = [
+  "chemical engineering",
+  "discredization",
+  "IDAES",
+  "idaes-mvo",
+  "process family design",
+  "process modeling",
+  "surrogate modeling"
+]
+
+dynamic = ["version"]
+
+dependencies = [
+"keras==3.14.1",
+"lightgbm==4.6.0",
+"matplotlib==3.11.0",
+"numpy==2.1.0",
+"omlt==1.2.2",
+"onnx==1.22.0",
+"onnxconverter-common==1.16.0",
+"onnxmltools==1.16.0",
+"onnxruntime==1.27.0",
+"pandas==3.0.3",
+"pillow==12.2.0",
+"pyomo==6.10.1",
+"scikit-learn==1.9.0",
+"scipy==1.18.0",
+"skl2onnx==1.20.0",
+"tensorflow==2.21.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "addheader",
+  "black",
+  "pre-commit==3.7.0",
+  "pylint",
+  "pytest",
+  "pyyaml",
+  "ruff",
+]
+
+[tool.setuptools_scm]
+version_scheme = "guess-next-dev"
+local_scheme = "node-and-date"
+tag_regex = "^v(?P<version>\\d+\\.\\d+\\.\\d+)$"
+
+[tool.setuptools]
+zip-safe = false
+include-package-data = true
+
+[tool.pylint.main]
+py-version = "3.10"
+
+[tool.setuptools.packages.find]
+include = ["idaes_mvo*"]
+
+[tool.setuptools.package-data]
+"*" = [
+  "*.template",
+  "*.json",
+  "*.yaml",
+  "*.svg",
+  "*.png",
+  "*.jpg",
+  "*.csv",
+  "*.ipynb",
+  "*.txt",
+  "*.js",
+  "*.css",
+  "*.html",
+  "*.json.gz",
+  "*.dat",
+  "*.h5",
+  "*.pb",                  # for Keras Surrogate folder
+  "*.data-00000-of-00001", # for Keras Surrogate folder
+  "*.index",               # for Keras Surrogate folder
+  "*.trc",
+  "*.nl",
+  "*.keras",               # idaes/core/surrogate/tests/data/keras_models
+  "*.onnx"
+]
+
+[tool.pylint."messages control"]
+disable = [
+  "E", # all errors
+  "W", # all warnings
+  "C", # all conventions
+  "R", # all refactor
+]
+
+# see https://pylint.readthedocs.io/en/v2.17.7/user_guide/messages/index.html
+# for a list of all messages
+enable = [
+  "import-error",
+  "unused-import",
+  "wildcard-import",
+  "wrong-import-order",
+  "wrong-import-position",
+  "ungrouped-imports",
+  "implicit-str-concat",
+  "dangerous-default-value",
+  "invalid-name"
+]
+
+[tool.flake8]
+ignore = ["W293", "W291", "W503", "W504", "E203"]
+exclude = "tests"
+max-line-length = 88
+
+[project.urls]
+Homepage = "https://github.com/IDAES/idaes-mvo"
+Issues = "https://github.com/IDAES/idaes-mvo/issues"
+
+
