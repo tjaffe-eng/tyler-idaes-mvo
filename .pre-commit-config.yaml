@@ -33,7 +33,7 @@ repos:
     hooks:
       - id: pytest
         name: pytest
-        entry: pytest
+        entry: bash -c "PRE_COMMIT=1 pytest"
         language: system
         pass_filenames: false
         types: [python]
