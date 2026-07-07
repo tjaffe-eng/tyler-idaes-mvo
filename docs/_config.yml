@@ -1,0 +1,15 @@
+title: Idaes Multi-Variant Optimization
+author: Tyler R Jaffe
+logo: ""
+
+execute:
+  execute_notebooks: "off"
+
+sphinx:
+  extra_extensions:
+    - sphinx.ext.autodoc
+    - sphinx.ext.napoleon
+    - sphinx.ext.viewcode
+  config:
+    sys_path:
+      - "../"
