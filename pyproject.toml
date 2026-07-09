@@ -38,6 +38,7 @@ keywords = [
 dynamic = ["version"]
 
 dependencies = [
+"jupyter-book==2.1.6",
 "keras==3.14.1",
 "keras-tuner==1.4.8",
 "lightgbm==4.6.0",
