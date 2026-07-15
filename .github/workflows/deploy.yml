@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main 
+      - DEV_Package_Req_and_Install
 
 # This job installs dependencies, builds the book, and deploys it
 jobs:
