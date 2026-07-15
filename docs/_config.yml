@@ -5,6 +5,10 @@ logo: ""
 execute:
   execute_notebooks: "off"
 
+myst:
+  error_rules:
+    - myst-file-loads
+
 sphinx:
   extra_extensions:
     - sphinxcontrib.bibtex
@@ -14,5 +18,11 @@ sphinx:
   config:
     bibtex_bibfiles:
       - references.bib
-    sys_path:
-      - "../"
+    html_theme: sphinx_book_theme
+    html_theme_options:
+      repository_url: "https://github.com/yourusername/idaes_mvo"
+      repository_branch: "main"
+      launch_buttons:
+        notebook_interface: jupyterlab
+    exclude_patterns:
+      - "_build"
