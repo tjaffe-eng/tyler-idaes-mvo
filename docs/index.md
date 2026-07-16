@@ -21,11 +21,11 @@ For more information on the code and modeling library see the IDAES gibhub page 
 
 ## About IDAES-MVO
 
-This is a python package under the IDAES umbrella that implements optimization-based formulations for designing a family of related process systems rather than a single isolated design. The goal is to balance standardization and customization so that a set of process units can be manufactured and deployed more efficiently.
+This is a python package under the IDAES umbrella that implements optimization-based formulations for designing a family of related process systems rather than a single isolated design. The goal is to balance standardization and customization so that a set of process units can be manufactured and deployed more efficiently and cost effective.
 
 The repository currently supports two modeling approaches:
 
-- Discretized Approach
-- MILP-representable ML Surrogates approach
+- Discretized approach
+- MILP-representable ML surrogates approach
 
 These approaches are described in more detail in the [Core Models](reference_guides.ipynb#core-models) section, and papers covering the development work are cited in the [Further Reading](reference_guides.ipynb#further-reading)section.

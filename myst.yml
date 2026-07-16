@@ -1,0 +1,15 @@
+# See docs at: https://mystmd.org/guide/frontmatter
+version: 1
+project:
+  id: 71f84fb3-3dc7-414d-951e-e50e1c8b57b8
+  # title:
+  # description:
+  # keywords: []
+  # authors: []
+  github: https://github.com/tjaffe-eng/tyler-idaes-mvo
+  # To autogenerate a Table of Contents, run "myst init --write-toc"
+site:
+  template: book-theme
+  # options:
+  #   favicon: favicon.ico
+  #   logo: site_logo.png
