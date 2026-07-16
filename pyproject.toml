@@ -45,6 +45,7 @@ dependencies = [
 "linear-tree==0.3.5",
 "matplotlib==3.11.0",
 "myst-nb==1.4.0",
+"myst-parser==5.1.0",
 "numpy==2.1.0",
 "omlt==1.2.2",
 "onnx==1.22.0",
