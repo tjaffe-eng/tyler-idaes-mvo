@@ -1,13 +1,11 @@
 name: deploy-book
 
-# Trigger the workflow on every push to the main branch
 on:
   push:
     branches:
       - main 
       - DEV_Package_Req_and_Install
 
-# This job installs dependencies, builds the book, and deploys it
 jobs:
   deploy-book:
     runs-on: ubuntu-latest
@@ -26,17 +24,31 @@ jobs:
       - name: Install dependencies
         run: |
           if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
+          # Ensure Jupyter kernels are available if MyST executes notebooks in the future
+          pip install ipykernel
 
+      # 1. Setup Node.js (Required by MyST-CLI)
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # 2. Install the MyST compiler globally
+      - name: Install MyST CLI
+        run: npm install -g mystmd
+
+      # 3. Build the book using MyST inside the docs folder
       - name: Build the book
         working-directory: docs
-        run: |
-          # Bypasses MyST-CLI to build directly with Python's Sphinx
-          python -m sphinx -b html . _build/html
+        env:
+          BASE_URL: /${{ github.event.repository.name }}
+        run: myst build --html
 
+      # 4. Upload the built static files
+      # MyST creates its build folder inside the directory where myst.yml lives
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Point this to the exact build folder Sphinx created
           path: "docs/_build/html"
 
       - name: Deploy to GitHub Pages
