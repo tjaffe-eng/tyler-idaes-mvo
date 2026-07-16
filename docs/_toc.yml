@@ -1,7 +1,0 @@
-format: jb-book
-root: index
-chapters:
-  - file: explanations
-  - file: getting_started
-  - file: examples
-  - file: reference_guides
