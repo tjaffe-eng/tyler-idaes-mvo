@@ -1,28 +1,20 @@
 version: 1
-
 project:
   title: Idaes Multi-Variant Optimization
   author: Tyler R Jaffe
-  
-  # Tell MyST that the index.md file is inside the docs/ folder
   index: index.md
-
   exclude:
     - _build
     - .myst
     - .jupyter_cache
-
   bibliography:
-    - docs/references.bib
-
-  # Use direct paths from the project root folder
+    - references.bib
   toc:
     - file: index.md
     - file: explanations.ipynb
     - file: getting_started.ipynb
     - file: examples.ipynb
     - file: reference_guides.ipynb
-
 site:
   template: book-theme
   options:
