@@ -6,10 +6,10 @@ This documentation provides the motivation behind the work, how to install indae
 
 **Get started**
 
-- **Installtion instructions:** See [Getting Started](docs_book.ipynb#getting-started) section.
-- **API Reference:** See [API Reference](docs_book.ipynb#api-reference) section.
-- **Examples:** See where to being working with `idaes_mvo` package go to the [Example Workflows](docs_book.ipynb#example-workflows)
-- **Detialed Model Descriptions and Papers** See [Reference Guides](docs_book.ipynb#reference-guides) and [Further Reading](docs_book.ipynb#further-reading) sections.
+- **Installtion instructions:** See [Getting Started](getting_started.ipynb) section.
+- **API Reference:** See [API Reference](getting_started.ipynb#api-reference) section.
+- **Examples:** See where to being working with `idaes_mvo` package go to the [Examples](examples.ipynb)
+- **Detialed Model Descriptions and Papers** See [Reference Guides](reference_guides.ipynb)
 
 ## About IDAES
 
@@ -28,4 +28,4 @@ The repository currently supports two modeling approaches:
 - Discretized Approach
 - MILP-representable ML Surrogates approach
 
-These approaches are described in more detail in the [Core Models](docs_book.ipynb#core-models) section, and papers covering the development work are cited in the [Further Reading](docs_book.ipynb#further-reading) section.
+These approaches are described in more detail in the [Core Models](reference_guides.ipynb#core-models) section, and papers covering the development work are cited in the [Further Reading](reference_guides.ipynb#further-reading)section.
