@@ -25,18 +25,19 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
           if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
-      
+
       - name: Build the book
         working-directory: docs
         run: |
-          jupyter-book build . --html
+          # Bypasses MyST-CLI to build directly with Python's Sphinx
+          python -m sphinx -b html . _build/html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "docs/_build/site"
+          # Point this to the exact build folder Sphinx created
+          path: "docs/_build/html"
 
       - name: Deploy to GitHub Pages
         id: deployment
