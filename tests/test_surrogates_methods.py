@@ -20,8 +20,8 @@ from process_family.utils.trainer.tree import TreeTrainer
 # 1. Test Parameters for Initilaizing Model Parameters
 # ============================================================
 ROOT = Path(__file__).resolve().parents[1]
-EXAMPLE_DIR = ROOT / "example"
-CSV_PATH = EXAMPLE_DIR / "data" / "transcritical-co2-data-small.csv"
+TESTS_DIR = ROOT / "tests"
+CSV_PATH = TESTS_DIR / "data" / "transcritical-co2-data-small.csv"
 # ============================================================
 # 2. Test Parameters for Surrogate Model Methods
 # ============================================================
