@@ -338,7 +338,6 @@ def test_surrogate_optimization_method_solves_returns_solution(tmp_path):
     # Did the optimization model return a solution dictionary with the expected keys and values?
     solution = spfd.get_results_dict(round_accuracy=3)
     assert set(solution.keys()) == SET_DESIGN_VARIABLE
-    print(solution)
 
     for v, designs in solution.items():
         assert designs[spfd.C.index("Evaporator Area")] in [66.667, 105.0]
