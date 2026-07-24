@@ -268,7 +268,7 @@ def test_load_trained_models_and_build_optimization_model(tmp_path):
         task="classification-regression",
         directory=str(model_dir),
         plot_metrics=False,
-        hp_tune=True,
+        hp_tune=False,
     )
     trainer.train_gbdt(
         task="regression", directory=str(model_dir), plot_metrics=False, hp_tune=True
