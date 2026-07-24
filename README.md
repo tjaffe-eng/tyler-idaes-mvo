@@ -1,66 +1,67 @@
-# Process Family Design
+# IDAES-MVO Toolkit
 
-This Python repository contains generalized optimization formulations (written in the Algebraic Modeling Language [Pyomo](https://github.com/Pyomo/pyomo)) to solve process family design problems. The methodology has been combined into a Python package for ease of use. This problem can be solved in various ways – currently, in this repository, we can solve this problem using a discretization method or embedded machine-learning surrogates. 
+## Project Build and Download Statuses
+[![Tests](https://github.com/tjaffe-eng/tyler-idaes-mvo/actions/workflows/deploy-book.yml/badge.svg)](https://github.com/tjaffe-eng/tyler-idaes-mvo/actions/workflows/deploy-book.yml)
+[![Documentation](https://img.shields.io/badge/docs-passing-brightgreen)](https://tjaffe-eng.github.io/tyler-idaes-mvo/)
+[![GitHub contributors](https://img.shields.io/github/contributors/tjaffe-eng/tyler-idaes-mvo.svg)](https://github.com/tjaffe-eng/tyler-idaes-mvo/graphs/contributors)
+[![Merged PRs](https://img.shields.io/github/issues-pr-closed-raw/tjaffe-eng/tyler-idaes-mvo.svg?label=merged+PRs)](https://github.com/tjaffe-eng/tyler-idaes-mvo/pulls?q=is:pr+is:merged)
+[![Issue stats](http://isitmaintained.com/badge/resolution/tjaffe-eng/tyler-idaes-mvo.svg)](http://isitmaintained.com/project/tjaffe-eng/tyler-idaes-mvo)
+<!-- END Status badges -->
 
-Please reference the paper for this software package as:
+## Overview
+The IDAES-MVO Toolkit provides open-source, Python-based, multi-scale tools for multi-variant process modeling. Developed in support of the **Institute for the Design of Advanced Energy Systems (IDAES)**, the toolkit addresses **process family design**: developing optimization-backed manufacturing strategies for deploying families of process systems. By designing a platform of standardized, shared components alongside unique, site-specific elements, the framework balances the trade-offs between standardization and customization.
 
-    @article{stinchfield2024mixed,
-                title={A mixed integer linear programming approach for the design of chemical process families},
-                author={Stinchfield, Georgia and Morgan, Joshua C and Naik, Sakshi and Biegler, Lorenz T and Eslick, John C and Jacobson, Clas and Miller, David C and Siirola, John D and Zamarripa, Miguel and Zhang, Chen and others},
-                journal={Computers \& Chemical Engineering},
-                volume={183},
-                pages={108620},
-                year={2024},
-                publisher={Elsevier}
-            }
+### Motivation
+Imagine deploying industrial refrigeration units across multiple factories with different load demands. Optimizing each installation independently leads to costly, one-off manufacturing runs. Instead of treating each deployment as an isolated problem, this package optimizes the entire family simultaneously to enable standardized manufacturing.
 
-Please consider also citing the following paper if using the ML surrogates portion of this work:
+### Solution Methods
+Built on the [Pyomo](https://github.com/Pyomo/pyomo) Algebraic Modeling Language, this Python package offers generalized optimization formulations that can be solved via:
+* **Discretization Methods**
+* **Embedded Machine-Learning Surrogates**
 
-    @article{stinchfield2025mixed,
-                title={Mixed-Integer Linear Programming Formulation with Embedded Machine Learning Surrogates for the Design of Chemical Process Families},
-                author={Stinchfield, Georgia and Khalife, Natali and Ammari, Bashar L and Morgan, Joshua C and Zamarripa, Miguel and Laird, Carl D},
-                journal={Industrial \& Engineering Chemistry Research},
-                year={2025},
-                publisher={ACS Publications}
-            }
-     
-## Problem Statement
+For detailed mathematical models and motivations, review the [explanation notebook](docs/explanation.ipynb) and [reference guide](docs/reference_guides.ipynb)
 
-Process systems is a broad term that captures a variety of systems based on chemical and mechanical processes. Some are small and relatively simple, like air conditioning units, while others are vast and complex, like a power plant. Traditionally, process systems engineers focus on optimizing the complex, nonlinear equations that govern the physics of these systems to find ideal operating conditions and schedules and overall designs of the systems to minimize expenses while meeting customers’ and company requirements.
 
-Manufacturing process systems are rarely considered in the context of optimization in process systems engineering. When designing a singular instance of a system, the deployment context and system itself are used to determine optimal decisions (e.g., operations, schedules, designs). Manufacturing schemes for mass deployment are rarely considered. However, they are key areas for saving capital and deployment costs as it is not likely a process system will only be deployed once.
+## Getting Started
 
-For example, take a refrigeration system to be deployed at a factory. A team of engineers will decide each possible optimization variable for this particular setting. This is time-consuming; additionally, manufacturing one-off designs is increasingly costly compared to standardized manufacturing lines.
-Consider now that this refrigeration system is also being deployed at multiple factories with different load requirements. Rather than viewing each deployment as a singular, isolated optimization problem, we propose designing all the refrigeration systems simultaneously in a way that leads to standardization at the manufacturing levels.
+* **Installation:** Follow the [Getting Started guide](docs/getting_started.ipynb#Installation) to set up the IDAES-MVO Python package locally.
+* **Examples:** Browse the [Examples section](docs/examples.ipynb#Installation) for an overview of available tools. You can also inspect and run these files directly from the [`examples`](examples) folder.
+* **Framework & Background:** Read the [reference guide](docs/reference_guides.ipynb) for a detailed breakdown of the underlying mathematical framework.
 
-In process family design, we aim to develop an optimization-backed manufacturing scheme for deploying a "family" of process systems. We design elements of these systems commonly, designing a platform of standardized units from which aspects of the system must be selected. We design other system elements uniquely, aiming to balance the trade-offs between standardization and customization.
+## System requirements
+The code and examples have been tested with the following operating systems:
 
-_Please see the References section below for a more comprehensive problem statement._
+|Operating system|Supported versions  |
+|----------------|--------------------|
+| Linux          | Any modern Linux   |
+| Windows        | Windows 10         |
+| macOS          | Partly supported*  |
 
-## Optimization Techniques
+Most of the functionality is implemented in Python. In accordance with
+the end-of-life for many Python 2 libraries, the IDAES/IDAES-MVO Toolkit is written
+for Python 3. The following sub-versions are supported:
 
-We pose a general problem, coined "process family design", and have developed four subsequent optimization-based techniques to solve it (where each named approach corresponds to the same numbered paper reference below):
+* Python 3.13
 
-1. Discretization approach
-2. MILP-representable ML Surrogates approach
-3. Decomposition of the Discretization approach
-4. Discretization approach + consideration for Economies of Numbers savings
 
-This package and repository demonstrate approaches 1 and 2.
+## Contacts and more information
 
-### Approach 1: Discretization<sup>1</sup>
+General, background and overview information on IDAES is available at the [IDAES main website](https://www.idaes.org).
+Framework development happens at our [GitHub repo](https://github.com/IDAES/idaes-mvo) where you can [report issues/bugs](https://github.com/IDAES/idaes-mvo/issues) or [make contributions](https://github.com/IDAES/idaes-mvo/pulls).
 
-Searching the continuous design space is impractical for complex, non-linear systems. Our first approach involved discretizing across the design space, simulating, and making optimal selections among these discrete design choices. In addition, the formulation shares the structure and properties of the P-median optimization formulation.
+## Funding acknowledgements
 
-_See the discretized.py file in the example directory_
+This work was conducted as part of the [Institute for the Design of Advanced Energy Systems (IDAES)](https://idaes.org)
+with support through the [Simulation-Based Engineering, Crosscutting Research Program](https://netl.doe.gov/coal/simulation-based-engineering)
+within the U.S. Department of Energy’s [Office of Fossil Energy and Carbon Management (FECM)](https://www.energy.gov/fecm/office-fossil-energy-and-carbon-management).
 
-### Approach 2: Embedded MILP-representable Machine Learning Surrogates<sup>2</sup>
+## Contributing
 
-Constraining our decisions to discrete designs limits our ability to customize the manufacturing scheme fully; additionally, we have no guarantees that the optimal design is among the discrete options we pre-selected. Our second approach involved training and embedding machine learning surrogates to replace the complex, non-linear system of equations that govern the physics of these models. This allowed us to search the surrogated continuous design space.  
+Please see our [Getting Started](docs/getting_started.ipynb) and [Examples section](docs/examples.ipynb#Installation) on how to work with the idaes-mvo source code and contribute changes to the project.
 
-_See the surrogates.py file in the examples directory_
-
-# References
+**By contributing to this repository, you are agreeing to all the terms set out in the LICENSE.md and COPYRIGHT.md files in this directory.**
+  
+## References
 
 1. G. Stinchfield, J.C Morgan, S. Naik, L.T. Biegler, J.C. Eslick, C. Jacobson, D.C. Miller, J.D. Siirola, M.A. Zamarripa, C. Zhang, Q. Zhang, C.D. Laird, “A Mixed Integer Linear Programming Approach for the Design of Chemical Process Families”. Computers & Chemical Engineering (2024): 108620.
 
