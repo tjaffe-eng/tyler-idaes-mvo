@@ -29,6 +29,10 @@ jobs:
           if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
           # Ensure Jupyter kernels are available if MyST executes notebooks in the future
           pip install ipykernel
+      
+      - name: Run Pytest suite
+        run: |
+          pytest
 
       # 1. Setup Node.js (Required by MyST-CLI)
       - name: Set up Node.js
