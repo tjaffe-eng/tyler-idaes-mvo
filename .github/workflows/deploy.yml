@@ -30,6 +30,11 @@ jobs:
           # Ensure Jupyter kernels are available if MyST executes notebooks in the future
           pip install ipykernel
       
+      - name: Install CBC Solver
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y coinor-cbc
+
       - name: Run Pytest suite
         run: |
           pytest
