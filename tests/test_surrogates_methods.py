@@ -307,9 +307,14 @@ def test_surrogate_optimization_method_solves_returns_solution(tmp_path):
         directory=str(model_dir),
         plot_metrics=False,
         hp_tune=True,
+        deterministic=True,
     )
     trainer.train_gbdt(
-        task="regression", directory=str(model_dir), plot_metrics=False, hp_tune=True
+        task="regression",
+        directory=str(model_dir),
+        plot_metrics=False,
+        hp_tune=True,
+        deterministic=True,
     )
 
     # Build and load surrogate models, build optimization model, and solve.
