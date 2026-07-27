@@ -13,7 +13,7 @@ from lineartree import LinearTreeClassifier, LinearTreeRegressor
 from onnxmltools.convert.lightgbm.convert import convert
 from skl2onnx.common.data_types import FloatTensorType
 from sklearn.linear_model import LinearRegression, LogisticRegression
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import GridSearchCV, KFold, StratifiedKFold
 
 from process_family.utils.trainer.base import BaseTrainer
 
@@ -45,7 +45,13 @@ class TreeTrainer(BaseTrainer):
             print(f"Onnx model written to {onnx_file.name}")
 
     def train_gbdt(
-        self, task, directory, plot_metrics=False, hp_tune=False, deterministic=False
+        self,
+        task,
+        directory,
+        plot_metrics=False,
+        hp_tune=False,
+        deterministic=False,
+        cv_splitting=None,
     ):
         """
         trains a gradient boosted decision tree, using the lightgbm package from Microsoft
@@ -100,9 +106,9 @@ class TreeTrainer(BaseTrainer):
                 "objective": [obj],
                 "metric": [metric],
                 "boosting_type": ["gbdt"],
-                "num_trees": [10, 50, 100],
+                "n_estimators": [10, 50, 100],
                 "max_depth": [10, 50, 100],
-                "min_data_in_leaf": [1, 5, 15, 20],
+                "min_child_samples": [1, 5, 15, 20],
                 "random_state": [1, 10, 50],
             }
 
@@ -112,8 +118,24 @@ class TreeTrainer(BaseTrainer):
                 else lgb.LGBMClassifier()
             )
             base_estimator.set_params(deterministic=deterministic)
+
+            if cv_splitting == "kfold":
+                is_regression = task in ("regression", "classification-regression")
+
+                if is_regression:
+                    cv_splitter = KFold(n_splits=3, shuffle=True, random_state=42)
+                else:
+                    cv_splitter = StratifiedKFold(
+                        n_splits=3, shuffle=True, random_state=42
+                    )
+
+            else:
+                cv_splitting = 3
+
             # Create the GridSearchCV object
-            grid = GridSearchCV(estimator=base_estimator, param_grid=params_grid, cv=3)
+            grid = GridSearchCV(
+                estimator=base_estimator, param_grid=params_grid, cv=cv_splitter
+            )
 
             # train the model
             grid_result = grid.fit(x_train, y_train)
