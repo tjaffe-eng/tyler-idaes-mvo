@@ -130,7 +130,7 @@ class TreeTrainer(BaseTrainer):
                     )
 
             else:
-                cv_splitting = 3
+                cv_splitter = 3
 
             # Create the GridSearchCV object
             grid = GridSearchCV(
