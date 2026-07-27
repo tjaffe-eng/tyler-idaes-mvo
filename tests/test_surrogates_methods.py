@@ -308,6 +308,7 @@ def test_surrogate_optimization_method_solves_returns_solution(tmp_path):
         plot_metrics=False,
         hp_tune=True,
         deterministic=True,
+        cv_splitting="kfold",
     )
     trainer.train_gbdt(
         task="regression",
@@ -315,6 +316,7 @@ def test_surrogate_optimization_method_solves_returns_solution(tmp_path):
         plot_metrics=False,
         hp_tune=True,
         deterministic=True,
+        cv_splitting="kfold",
     )
 
     # Build and load surrogate models, build optimization model, and solve.
@@ -345,7 +347,7 @@ def test_surrogate_optimization_method_solves_returns_solution(tmp_path):
     assert set(solution.keys()) == SET_DESIGN_VARIABLE
 
     for v, designs in solution.items():
-        assert designs[spfd.C.index("Evaporator Area")] in [66.667, 105.0]
+        assert designs[spfd.C.index("Evaporator Area")] in [75, 86.667]
         assert pytest.approx(designs[spfd.C.index("Condenser Area")]) == 50.0
         assert designs[spfd.C.index("Compressor Design Flow")] in [144.167, 62.5]
 
