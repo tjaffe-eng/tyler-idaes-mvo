@@ -44,7 +44,9 @@ class TreeTrainer(BaseTrainer):
             onnx_file.write(onnx_model.SerializeToString())
             print(f"Onnx model written to {onnx_file.name}")
 
-    def train_gbdt(self, task, directory, plot_metrics=False, hp_tune=False):
+    def train_gbdt(
+        self, task, directory, plot_metrics=False, hp_tune=False, deterministic=False
+    ):
         """
         trains a gradient boosted decision tree, using the lightgbm package from Microsoft
         Note: I have issues getting lightgbm to work properly on M1 chip
@@ -109,7 +111,7 @@ class TreeTrainer(BaseTrainer):
                 if (task == "regression" or task == "classification-regression")
                 else lgb.LGBMClassifier()
             )
-
+            base_estimator.set_params(deterministic=deterministic)
             # Create the GridSearchCV object
             grid = GridSearchCV(estimator=base_estimator, param_grid=params_grid, cv=3)
 
@@ -133,6 +135,7 @@ class TreeTrainer(BaseTrainer):
                 "random_state": 42,
                 "verbose": 0,
                 "force_col_wise": True,
+                "deterministic": deterministic,
             }
 
             base_estimator = (
