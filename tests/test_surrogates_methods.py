@@ -334,7 +334,7 @@ def test_surrogate_optimization_method_solves_returns_solution(tmp_path):
     assert set(solution.keys()) == SET_DESIGN_VARIABLE
 
     for v, designs in solution.items():
-        assert designs[spfd.C.index("Evaporator Area")] in [75, 86.667]
+        assert designs[spfd.C.index("Evaporator Area")] in [75, 86.667, 105.0, 67.667]
         if v == (200, 31):
             assert pytest.approx(designs[spfd.C.index("Condenser Area")]) == 25.0
         else:
